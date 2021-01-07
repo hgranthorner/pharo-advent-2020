@@ -20,11 +20,8 @@ DayTwoTest >> setUp [
 DayTwoTest >> testSolveFirst [
 	"test the solve first implementor"
 	| entries solution result |
-	entries := #(
-'1-3 a: abcde'
-'1-3 b: cdefg'
-'2-9 c: ccccccccc').
+	entries := 'C:\Users\HHORNER\Personal\DayTwoData.txt' asFileReference contents lines. 
 	result := sut solveFirst: entries.
-	solution := 2.
+	solution := 572.
 	self assert: result equals: solution.
 ]
