@@ -27,7 +27,18 @@ DayTwo >> solveFirst: passwordStrings [
 	count := passwordStrings count: [ :each |
 		password := each copyAfterLast: Character space.
 		requirements := PasswordRequirement fromString: each.
-		requirements validate: password
+		requirements validateMinMax: password
+	].
+	^ count.
+]
+
+{ #category : #solutions }
+DayTwo >> solveSecond: passwordStrings [ 
+	| count password requirements |
+	count := passwordStrings count: [ :each |
+		password := each copyAfterLast: Character space.
+		requirements := PasswordRequirement fromString: each.
+		requirements validateByIndex: password
 	].
 	^ count.
 ]

@@ -1,5 +1,11 @@
 "
 An object that contains the requirement of a password a la the day two puzzles.
+
+Puzzle two:
+
+Each policy actually describes two positions in the password, where 1 means the first character, 2 means the second character, and so on. (Be careful; Toboggan Corporate Policies have no concept of ""index zero""!) Exactly one of these positions must contain the given letter. Other occurrences of the letter are irrelevant for the purposes of policy enforcement.
+
+Given the same example list from above:
 "
 Class {
 	#name : #PasswordRequirement,
@@ -31,7 +37,15 @@ PasswordRequirement >> initializeWithMin: anInteger max: anInteger2 letter: aStr
 ]
 
 { #category : #validation }
-PasswordRequirement >> validate: password [
+PasswordRequirement >> validateByIndex: str [
+	| first second |
+	first := str at: min.
+	second := str at: max.
+	^ (first = letter) xor: (second = letter).
+]
+
+{ #category : #validation }
+PasswordRequirement >> validateMinMax: password [
 	| count |
 	count := password count: [ :char | char = letter ].
 	^ count between: min and: max.
