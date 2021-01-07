@@ -23,12 +23,11 @@ Class {
 
 { #category : #solutions }
 DayTwo >> solveFirst: passwordStrings [ 
-	| count parser password requirements |
-	
+	| count password requirements |
 	count := passwordStrings count: [ :each |
-		parser := PasswordParser with: each.
-		password := parser password.
-		requirements := parser requirements.
-		^ password validate: requirements.
-	]
+		password := each copyAfterLast: Character space.
+		requirements := PasswordRequirement fromString: each.
+		requirements validate: password
+	].
+	^ count.
 ]
